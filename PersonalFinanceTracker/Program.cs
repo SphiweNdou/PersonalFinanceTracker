@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using PersonalFinanceTracker.Data;
 using PersonalFinanceTracker.Models;
 
 var builder = WebApplication.CreateBuilder(args);
