@@ -9,7 +9,7 @@
         {
         }
 
-        public async Task<IEnumerable<Transaction>> GetUserTransactionAsync(int userId) 
+        public async Task<IEnumerable<Transaction>> GetUserTransactionAsync(string userId) 
         {
             return await _dbSet.Where(t => t.UserId == userId).ToListAsync();
         }

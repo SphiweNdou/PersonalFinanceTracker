@@ -3,6 +3,6 @@
     using PersonalFinanceTracker.Models;
     public interface ITransactionRepository : IRepository<Transaction>
     {
-        Task<IEnumerable<Transaction>> GetUserTransactionAsync(int userId);
+        Task<IEnumerable<Transaction>> GetUserTransactionAsync(string userId);
     }
 }
