@@ -12,7 +12,7 @@
          */
         Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate);
         Task AddAsync(T entity);
-        Task Update(T entity);
-        Task Remove(T entity);  
+        Task UpdateAsync(T entity);
+        Task RemoveAsync(T entity);  
     }
 }
