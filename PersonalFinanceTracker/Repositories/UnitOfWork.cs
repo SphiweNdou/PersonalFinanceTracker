@@ -3,7 +3,7 @@
     using PersonalFinanceTracker.Data;
     using PersonalFinanceTracker.Models;
 
-    public class UnitOfWork
+    public class UnitOfWork :IUnitOfWork
     {
         private readonly ApplicationDbContext _context;
         public ITransactionRepository Transactions { get; }
