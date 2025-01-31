@@ -31,6 +31,7 @@
             var user = new ApplicationUser
             {
                 FullName = registerRequest.FullName,
+                UserName = registerRequest.Email,
                 Email = registerRequest.Email
             };
 
