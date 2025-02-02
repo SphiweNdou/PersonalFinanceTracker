@@ -53,7 +53,7 @@
         {
             var user = await _userManager.FindByEmailAsync(loginRequest.Username);
 
-            if(user == null || !await _userManager.CheckPasswordAsync(user,loginRequest.Password))
+            if(user == null || await _userManager.CheckPasswordAsync(user,loginRequest.Password))
             {
                 return Unauthorized(new
                 {
@@ -81,9 +81,10 @@
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
-                issuer: _configuration["jwt:issuer"],
+                issuer: _configuration["jwt:Issuer"],
                 audience: _configuration["jwt:Audience"],
-                claims: claims, expires: DateTime.UtcNow.AddHours(1));
+                claims: claims, expires: DateTime.UtcNow.AddHours(1),
+                signingCredentials:creds);
             
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
