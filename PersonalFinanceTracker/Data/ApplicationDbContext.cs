@@ -14,5 +14,7 @@
 
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers {  get; set; }
+
+        public DbSet<Account> Accounts { get; set; }
     }
 }
