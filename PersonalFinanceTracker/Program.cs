@@ -89,6 +89,8 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 builder.Services.AddScoped<IRepository<ApplicationUser>, Repository<ApplicationUser>>();
 builder.Services.AddScoped<ITransactionService, TransactionService>();
+builder.Services.AddScoped<IAccountServices, AccountService>();
+builder.Services.AddScopped<IAccountRepository, AccountRepository>();
 
 builder.Services.AddLogging(logging =>
 {
