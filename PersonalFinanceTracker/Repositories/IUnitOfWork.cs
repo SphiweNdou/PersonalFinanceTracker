@@ -6,6 +6,7 @@ namespace PersonalFinanceTracker.Repositories
     {
         ITransactionRepository Transactions { get; }
         IRepository<ApplicationUser> Users { get; }
+        IAccountRepository Accounts { get; }
         Task<int> CompleteAsync();
     }
 }

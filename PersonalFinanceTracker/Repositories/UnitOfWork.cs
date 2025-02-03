@@ -8,13 +8,13 @@
         private readonly ApplicationDbContext _context;
         public ITransactionRepository Transactions { get; }
         public IRepository<ApplicationUser> Users { get; }
-        public IAccountRepository AccountRepository { get; }
+        public IAccountRepository Accounts { get; }
 
         public UnitOfWork(ApplicationDbContext context, ITransactionRepository transactions, IRepository<ApplicationUser> users, IAccountRepository accounts)
         {
             _context = context;
             Transactions = transactions;
-            AccountRepository = accounts;
+            Accounts = accounts;
             Users = users;
         }
         public async Task<int> CompleteAsync()

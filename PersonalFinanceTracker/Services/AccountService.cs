@@ -1,39 +1,42 @@
-﻿using PersonalFinanceTracker.Models;
-using PersonalFinanceTracker.Repositories;
-
-namespace PersonalFinanceTracker.Services
+﻿namespace PersonalFinanceTracker.Services
 {
+    using PersonalFinanceTracker.Models;
+    using PersonalFinanceTracker.Repositories;
     public class AccountService : IAccountServices
     {
-        private readonly IAccountRepository _accountRepository;
-        public AccountService (IAccountRepository accountRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public AccountService ( IUnitOfWork unitOfWork)
         {
-            _accountRepository = accountRepository;
+            _unitOfWork = unitOfWork;   
         }
 
         public async Task<IEnumerable<Account>> GetAllAccountsAsync()
         {
-            return await _accountRepository.GetAllAsync(); 
+            return await _unitOfWork.Accounts.GetAllAsync(); 
         }
 
         public async Task<Account> GetAccountByIdAsync(int id)
         {
-            return await _accountRepository.GetByIdAsync(id);
+            return await _unitOfWork.Accounts.GetByIdAsync(id);
         }
 
         public async Task CreateAccountAsync(Account account)
         {
-            _accountRepository.AddAsync(account);
+            await _unitOfWork.Accounts.AddAsync(account);
+            await _unitOfWork.CompleteAsync();
         }
 
         public async Task UpdateAccountAsync(Account account)
         {
-            _accountRepository.UpdateAsync(account);
+            await _unitOfWork.Accounts.UpdateAsync(account);
+            await _unitOfWork.CompleteAsync();
         }
 
         public async Task DeleteAccountAsync(int id)
         {
-            await _accountRepository.DeleteAsync(id);
+            await _unitOfWork.Accounts.DeleteAsync(id);
+            await _unitOfWork.CompleteAsync();
         }
+
     }
 }
