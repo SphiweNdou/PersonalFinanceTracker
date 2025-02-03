@@ -4,12 +4,14 @@
     using System.IdentityModel.Tokens.Jwt;
     using System.Security.Claims;
     using System.Text;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
     using Microsoft.IdentityModel.Tokens;
     using PersonalFinanceTracker.Models;
 
+    [Authorize]
     [Route("api/auth")]
     [ApiController]
     public class AuthController : ControllerBase
@@ -74,7 +76,9 @@
             {
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(),ClaimValueTypes.Integer64),
+                new Claim("role", user.Role)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["jwt:key"]));
