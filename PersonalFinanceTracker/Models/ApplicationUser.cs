@@ -5,7 +5,8 @@
 
     public class ApplicationUser : IdentityUser
     {
-        public string FullName {  get; set; }
+        public string FullName { get; set; }
+        public string Role { get; set; }
         public ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
     }
 }
