@@ -22,7 +22,7 @@
 
         public async Task CreateAccountAsync(Account account)
         {
-            await _unitOfWork.Accounts.AddAsync(account);
+            await _unitOfWork.Accounts.CreateAsync(account);
             await _unitOfWork.CompleteAsync();
         }
 
