@@ -1,14 +1,18 @@
-﻿using PersonalFinanceTracker.Data;
-using PersonalFinanceTracker.Models;
-
-namespace PersonalFinanceTracker.Repositories
+﻿namespace PersonalFinanceTracker.Repositories
 {
+    using System.Linq.Expressions;
+    using Microsoft.EntityFrameworkCore;
+    using PersonalFinanceTracker.Data;
+    using PersonalFinanceTracker.Models;
+
     public class AccountRepository : IAccountRepository
     {
         private readonly ApplicationDbContext _context;
+        protected readonly DbSet<Account> _dbSet;
         public AccountRepository (ApplicationDbContext context)
         {
             _context = context;
+            _dbSet = _context.Set<Account>();
         }
 
         public async Task<IEnumerable<Account>> GetAllAsync()
@@ -16,13 +20,10 @@ namespace PersonalFinanceTracker.Repositories
             return await _context.Accounts.ToListAsync();
         }
 
-        public async Taks<Account> FindAsync(int id)
-        {
-            return await _context.Accounts.FindAsync(id);
-        }
+        
         public async Task UpdateAsync(Account account)
         {
-            _context.Accounts.Update(account);
+             _context.Accounts.Update(account);
         }
 
         public async Task DeleteAsync(int id)
@@ -33,6 +34,16 @@ namespace PersonalFinanceTracker.Repositories
             {
                 _context.Accounts.Remove(account);
             }
+        }
+
+        public async Task<Account> GetByIdAsync(int id)
+        {
+            return await _context.Accounts.FindAsync(id);
+        }
+
+        public async Task CreateAsync(Account account)
+        {
+            await _context.Accounts.AddAsync(account);
         }
     }
 }

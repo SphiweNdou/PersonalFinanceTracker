@@ -2,7 +2,7 @@
 
 namespace PersonalFinanceTracker.Repositories
 {
-    public interface IAccountRepository : IRepository<Account>
+    public interface IAccountRepository
     {
         Task<IEnumerable<Account>> GetAllAsync();
         Task<Account> GetByIdAsync(int id);
