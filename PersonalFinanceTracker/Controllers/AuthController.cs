@@ -11,7 +11,7 @@
     using Microsoft.IdentityModel.Tokens;
     using PersonalFinanceTracker.Models;
 
-    [Authorize]
+    
     [Route("api/auth")]
     [ApiController]
     public class AuthController : ControllerBase
@@ -34,7 +34,8 @@
             {
                 FullName = registerRequest.FullName,
                 UserName = registerRequest.Email,
-                Email = registerRequest.Email
+                Email = registerRequest.Email,
+                Role = registerRequest.Role
             };
 
             var result = await _userManager.CreateAsync(user, registerRequest.Password);
@@ -77,7 +78,7 @@
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(),ClaimValueTypes.Integer64),
+                new Claim(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString(),ClaimValueTypes.Integer64),
                 new Claim("role", user.Role)
             };
 
