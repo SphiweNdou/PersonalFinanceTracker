@@ -21,7 +21,7 @@ builder.Services.AddSwaggerGen( options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo 
     {
-        Title = "Personal Finace Tracker API",
+        Title = "Personal Finance Tracker API",
         Version = "v1"
     });
 
@@ -30,9 +30,9 @@ builder.Services.AddSwaggerGen( options =>
         In = ParameterLocation.Header,
         Description = "Enter 'Bearer {token}'",
         Name = "Authorization",
-        Scheme = "Bearer",
+        Scheme = "bearer",
         BearerFormat = "JWT",
-        Type = SecuritySchemeType.ApiKey
+        Type = SecuritySchemeType.Http
     });
 
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -111,7 +111,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     app.MapOpenApi();
 }
-
 
 app.UseAuthentication();
 
